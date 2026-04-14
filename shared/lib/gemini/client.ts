@@ -23,7 +23,7 @@ export function getGeminiClient(): GoogleGenerativeAI {
  */
 export function getGeminiFlashModel() {
   return getGeminiClient().getGenerativeModel({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-flash",
     generationConfig: {
       temperature: 0.3,
       topP: 0.95,
