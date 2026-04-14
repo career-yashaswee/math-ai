@@ -105,7 +105,8 @@ create table if not exists public.attempts (
 create index if not exists idx_attempts_user on public.attempts(user_id, created_at desc);
 create index if not exists idx_attempts_question on public.attempts(question_id);
 create index if not exists idx_attempts_status on public.attempts(status);
-create index if not exists idx_attempts_user_date on public.attempts(user_id, (created_at::date));
+-- Note: expression index with ::date removed (not IMMUTABLE in PG).
+-- idx_attempts_user on (user_id, created_at desc) covers date-range queries.
 
 -- ─────────────────────────────────────────────────────────────
 -- 6. ANALYSIS
