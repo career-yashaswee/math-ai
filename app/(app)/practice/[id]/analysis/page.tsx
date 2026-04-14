@@ -76,7 +76,7 @@ function ScoreRing({ score }: { score: number }) {
 export default function AnalysisPage() {
   const params = useParams();
   const router = useRouter();
-  const attemptId = params.attemptId as string;
+  const attemptId = params.id as string;
 
   const { data: analysis, isLoading: analysisLoading } = useAnalysis(attemptId);
   const { data: attempt, isLoading: attemptLoading } = useAttempt(attemptId);

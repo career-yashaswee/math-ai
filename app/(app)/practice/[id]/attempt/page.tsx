@@ -34,7 +34,7 @@ export default function AttemptPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const questionId = params.questionId as string;
+  const questionId = params.id as string;
   const attemptId = searchParams.get("attemptId") ?? "";
 
   const { data: question, isLoading } = useQuestion(questionId);
