@@ -6,12 +6,8 @@ import { useHeatmapData } from "@/features/dashboard/hooks/useDashboardStats";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Activity } from "lucide-react";
 import { friendlyDate } from "@/shared/utils/date";
-import { useMemo } from "react";
 
-const WEEKS = 52;
-const DAYS = 7;
 const CELL = 12;
-const GAP = 2;
 
 function getColor(count: number): string {
   if (count === 0) return "oklch(0.15 0 0)";
@@ -24,34 +20,13 @@ function getColor(count: number): string {
 const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export function HeatmapWidget() {
-  const { data: heatmapData, isLoading } = useHeatmapData();
-
-  // Group into weeks
-  const weeks = useMemo(() => {
-    if (!heatmapData) return [];
-    const result: { date: string; count: number }[][] = [];
-    let week: { date: string; count: number }[] = [];
-
-    for (let i = 0; i < heatmapData.length; i++) {
-      const d = new Date(heatmapData[i].date);
-      if (week.length === 0 && d.getDay() !== 0) {
-        for (let j = 0; j < d.getDay(); j++) {
-          week.push({ date: "", count: 0 });
-        }
-      }
-      week.push(heatmapData[i]);
-      if (d.getDay() === 6 || i === heatmapData.length - 1) {
-        result.push(week);
-        week = [];
-      }
-    }
-    return result.slice(-WEEKS);
-  }, [heatmapData]);
-
-  const totalContributions = heatmapData?.reduce((sum, d) => sum + d.count, 0) ?? 0;
+  const { data, isLoading } = useHeatmapData();
+  const weeks = data?.weeks ?? [];
+  const totalContributions = data?.totalContributions ?? 0;
 
   return (
     <Card className="bg-card border-border">
+
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center justify-between text-sm font-semibold">
           <div className="flex items-center gap-2">

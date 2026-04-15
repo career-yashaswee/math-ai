@@ -24,16 +24,17 @@ export function useDashboardStats() {
 }
 
 /**
- * Submission heatmap data — last 365 days of attempt counts by date
+ * Submission heatmap data — last 365 days of attempt counts by date.
+ * Groups data into weeks (for 52-week grid) and calculates total contributions.
  */
 export function useHeatmapData() {
   const supabase = createClient();
 
-  return useQuery<HeatmapData[]>({
+  return useQuery({
     queryKey: ["dashboard", "heatmap"],
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return [];
+      if (!user) return { weeks: [], totalContributions: 0 };
 
       const oneYearAgo = new Date();
       oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
@@ -49,15 +50,43 @@ export function useHeatmapData() {
       const allDays = getPastNDays(365);
       for (const d of allDays) dayCountMap[d] = 0;
 
+      let totalContributions = 0;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       for (const a of (data ?? []) as any[]) {
         const day = new Date(a.created_at).toLocaleDateString("en-CA", {
           timeZone: "Asia/Kolkata",
         });
-        if (dayCountMap[day] !== undefined) dayCountMap[day]++;
+        if (dayCountMap[day] !== undefined) {
+          dayCountMap[day]++;
+          totalContributions++;
+        }
       }
 
-      return Object.entries(dayCountMap).map(([date, count]) => ({ date, count }));
+      const heatmapData = Object.entries(dayCountMap).map(([date, count]) => ({ date, count }));
+      
+      // Group into weeks
+      const weeks: { date: string; count: number }[][] = [];
+      let week: { date: string; count: number }[] = [];
+
+      for (let i = 0; i < heatmapData.length; i++) {
+        const d = new Date(heatmapData[i].date);
+        // Pad the first week if it doesn't start on Sunday
+        if (week.length === 0 && d.getDay() !== 0) {
+          for (let j = 0; j < d.getDay(); j++) {
+            week.push({ date: "", count: 0 });
+          }
+        }
+        week.push(heatmapData[i]);
+        if (d.getDay() === 6 || i === heatmapData.length - 1) {
+          weeks.push(week);
+          week = [];
+        }
+      }
+
+      return {
+        weeks: weeks.slice(-52),
+        totalContributions,
+      };
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -156,12 +185,13 @@ export function useChapterBreakdown() {
 }
 
 /**
- * Topic attempts bubble chart data
+ * Topic attempts bubble chart data.
+ * Pre-formats data for Recharts ScatterChart (x, y, z mappings).
  */
 export function useTopicBubbleData() {
   const supabase = createClient();
 
-  return useQuery<TopicBubbleItem[]>({
+  return useQuery({
     queryKey: ["dashboard", "topic-bubbles"],
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
@@ -190,16 +220,23 @@ export function useTopicBubbleData() {
         if (score != null) topicMap[name].scores.push(score);
       }
 
-      return Object.entries(topicMap).map(([topic_name, { scores, count }]) => ({
-        topic_name,
-        attempts: count,
-        accuracy: scores.length > 0
+      return Object.entries(topicMap).map(([topic_name, { scores, count }]) => {
+        const attempts = count;
+        const accuracy = scores.length > 0
           ? Math.round((scores.filter((s) => s >= 5).length / scores.length) * 100)
-          : 0,
-        avg_score: scores.length > 0
+          : 0;
+        const avg_score = scores.length > 0
           ? Math.round((scores.reduce((a, b) => a + b, 0) / scores.length) * 10) / 10
-          : 0,
-      }));
+          : 0;
+
+        return {
+          x: attempts,
+          y: accuracy,
+          z: Math.max(attempts * 40, 100),
+          name: topic_name,
+          avg_score,
+        };
+      });
     },
     staleTime: 5 * 60 * 1000,
   });

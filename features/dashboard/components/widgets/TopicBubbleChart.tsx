@@ -15,18 +15,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useTopicBubbleData } from "@/features/dashboard/hooks/useDashboardStats";
 
 export function TopicBubbleChart() {
-  const { data, isLoading } = useTopicBubbleData();
-
-  const chartData = (data ?? []).map((d) => ({
-    x: d.attempts,
-    y: d.accuracy,
-    z: Math.max(d.attempts * 40, 100),
-    name: d.topic_name,
-    avg_score: d.avg_score,
-  }));
+  const { data: chartData, isLoading } = useTopicBubbleData();
 
   return (
     <Card className="bg-card border-border">
+
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-sm font-semibold">
           <span className="text-primary text-base">◉</span>

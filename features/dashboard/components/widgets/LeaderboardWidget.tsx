@@ -7,6 +7,7 @@ import { Trophy } from "lucide-react";
 import { useLeaderboard } from "@/features/dashboard/hooks/useLeaderboard";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { cn } from "@/lib/utils";
+import { getInitials } from "@/shared/utils/profile";
 
 const RANK_STYLES: Record<number, string> = {
   1: "text-yellow-400 font-bold",
@@ -46,12 +47,7 @@ export function LeaderboardWidget() {
         ) : (
           data.map((entry) => {
             const isCurrentUser = entry.id === user?.id;
-            const initials = (entry.full_name ?? "?")
-              .split(" ")
-              .map((n) => n[0])
-              .join("")
-              .toUpperCase()
-              .slice(0, 2);
+            const initials = getInitials(entry.full_name ?? "Anonymous");
 
             return (
               <div

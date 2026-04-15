@@ -6,22 +6,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { LogOut, Loader2 } from "lucide-react";
+import { getUserProfile } from "@/shared/utils/profile";
 
 export function UserProfileWidget() {
   const { user } = useAuth();
   const { signOut, isLoggingOut } = useGoogleLogin();
 
-  const name =
-    user?.user_metadata?.full_name ??
-    user?.email?.split("@")[0] ??
-    "Student";
-  const avatar = user?.user_metadata?.avatar_url;
-  const initials = name
-    .split(" ")
-    .map((n: string) => n[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
+  const { name, avatar, initials, email } = getUserProfile(user);
 
   return (
     <Card className="bg-card border-border card-hover">
@@ -36,10 +27,11 @@ export function UserProfileWidget() {
             </Avatar>
             <div>
               <p className="text-sm font-semibold leading-tight">{name}</p>
-              <p className="text-xs text-muted-foreground">{user?.email}</p>
+              <p className="text-xs text-muted-foreground">{email}</p>
               <p className="text-xs text-primary/70 mt-0.5">Class 12 · Mathematics</p>
             </div>
           </div>
+
 
           <Button
             id="logout-btn"
