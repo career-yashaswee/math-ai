@@ -2,9 +2,14 @@
 
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { useGoogleLogin } from "@/features/auth/hooks/useGoogleLogin";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Button,
+  Card,
+  CardContent,
+} from "@/components/core";
 import { LogOut, Loader2 } from "lucide-react";
 import { getUserProfile } from "@/shared/utils/profile";
 

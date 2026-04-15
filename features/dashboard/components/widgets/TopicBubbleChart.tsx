@@ -10,8 +10,7 @@ import {
   ResponsiveContainer,
   ZAxis,
 } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardHeader, CardTitle, Skeleton } from "@/components/core";
 import { useTopicBubbleData } from "@/features/dashboard/hooks/useDashboardStats";
 
 export function TopicBubbleChart() {

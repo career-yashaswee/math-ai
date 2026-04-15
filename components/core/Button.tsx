@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 export interface CoreButtonProps extends BaseButtonProps {
   /** Enables future micro-interactions and audio feedback */
   interactive?: boolean;
+  children?: React.ReactNode;
 }
 
 /**

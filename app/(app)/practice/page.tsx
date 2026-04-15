@@ -12,9 +12,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
+  Badge,
+  Skeleton,
+} from "@/components/core";
 import { BookOpen, Layers, AlertCircle, ArrowRight } from "lucide-react";
 import type { QuestionSafe } from "@/shared/types/domain.types";
 import type { Metadata } from "next";

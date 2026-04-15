@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/core";
 import { cn } from "@/lib/utils";
 
 // Dynamic import to avoid SSR issues

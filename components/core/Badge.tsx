@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 export interface CoreBadgeProps extends BaseBadgeProps {
   interactive?: boolean;
+  children?: React.ReactNode;
 }
 
 /**

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/core";
 import { UserProfileWidget } from "@/features/dashboard/components/widgets/UserProfileWidget";
 import { StatsWidget } from "@/features/dashboard/components/widgets/StatsWidget";
 import { HeatmapWidget } from "@/features/dashboard/components/widgets/HeatmapWidget";

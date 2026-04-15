@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Brain, LayoutDashboard, BookOpen, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/core/Button";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [

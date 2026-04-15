@@ -1,8 +1,15 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Skeleton,
+} from "@/components/core";
 import { Trophy } from "lucide-react";
 import { useLeaderboard } from "@/features/dashboard/hooks/useLeaderboard";
 import { useAuth } from "@/features/auth/hooks/useAuth";

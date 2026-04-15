@@ -3,12 +3,17 @@
 import { useParams, useRouter } from "next/navigation";
 import { useAnalysis } from "@/features/analysis/hooks/useAnalysis";
 import { useAttempt } from "@/features/practice/hooks/useAttempt";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Separator } from "@/components/ui/separator";
-import { Progress } from "@/components/ui/progress";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Badge,
+  Button,
+  Skeleton,
+  Separator,
+  Progress,
+} from "@/components/core";
 import {
   ChevronRight,
   Trophy,

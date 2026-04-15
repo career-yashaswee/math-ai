@@ -1,8 +1,7 @@
 "use client";
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, CardHeader, CardTitle, Skeleton } from "@/components/core";
 import { PieChart as PieIcon } from "lucide-react";
 import { useChapterBreakdown } from "@/features/dashboard/hooks/useDashboardStats";
 
