@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Toaster, TooltipProvider } from "@/components/core";
 import { QueryProvider } from "@/shared/lib/tanstack-query/provider";
+import { SoundProvider } from "@/shared/lib/audio/SoundContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -58,24 +59,26 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <QueryProvider>
-            <TooltipProvider>
-              {children}
-              <Toaster
-                position="top-right"
-                toastOptions={{
-                  classNames: {
-                    toast:
-                      "bg-card border-border text-card-foreground shadow-xl",
-                    title: "text-foreground font-medium",
-                    description: "text-muted-foreground",
-                    actionButton: "bg-primary text-primary-foreground",
-                    cancelButton: "bg-secondary text-secondary-foreground",
-                    error: "border-destructive/50",
-                    success: "border-primary/50",
-                  },
-                }}
-              />
-            </TooltipProvider>
+            <SoundProvider>
+              <TooltipProvider>
+                {children}
+                <Toaster
+                  position="top-right"
+                  toastOptions={{
+                    classNames: {
+                      toast:
+                        "bg-card border-border text-card-foreground shadow-xl",
+                      title: "text-foreground font-medium",
+                      description: "text-muted-foreground",
+                      actionButton: "bg-primary text-primary-foreground",
+                      cancelButton: "bg-secondary text-secondary-foreground",
+                      error: "border-destructive/50",
+                      success: "border-primary/50",
+                    },
+                  }}
+                />
+              </TooltipProvider>
+            </SoundProvider>
           </QueryProvider>
         </ThemeProvider>
       </body>

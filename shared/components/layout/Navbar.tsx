@@ -6,6 +6,7 @@ import { Brain, LayoutDashboard, BookOpen, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/core/Button";
 import { cn } from "@/lib/utils";
+import { SoundControls } from "./SoundControls";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -49,21 +50,27 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Theme Toggle */}
-        <Button
-          id="theme-toggle-btn"
-          variant="ghost"
-          size="sm"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="text-muted-foreground hover:text-foreground w-8 h-8 p-0"
-          aria-label="Toggle theme"
-        >
-          {theme === "dark" ? (
-            <Sun className="w-4 h-4" />
-          ) : (
-            <Moon className="w-4 h-4" />
-          )}
-        </Button>
+        <div className="flex items-center gap-2">
+          {/* Sound Controls */}
+          <SoundControls />
+
+          {/* Theme Toggle */}
+          <Button
+            id="theme-toggle-btn"
+            variant="ghost"
+            size="sm"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="text-muted-foreground hover:text-foreground w-8 h-8 p-0"
+            aria-label="Toggle theme"
+            sound='CLICK'
+          >
+            {theme === "dark" ? (
+              <Sun className="w-4 h-4" />
+            ) : (
+              <Moon className="w-4 h-4" />
+            )}
+          </Button>
+        </div>
       </div>
     </header>
   );
