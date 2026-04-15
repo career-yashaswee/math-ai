@@ -6,6 +6,7 @@ import type { UserStatsResponse } from "@/shared/types/api.types";
 import type { HeatmapData, AccuracyDataPoint, ChapterBreakdownItem, TopicBubbleItem } from "@/shared/types/domain.types";
 import { createClient } from "@/shared/lib/supabase/client";
 import { getPastNDays, getWeekKey } from "@/shared/utils/date";
+import { API_ROUTES } from "@/shared/constants/api-routes";
 
 /**
  * Dashboard stats: streak, XP, coins, accuracy, total attempts
@@ -14,7 +15,7 @@ export function useDashboardStats() {
   return useQuery<UserStatsResponse>({
     queryKey: ["dashboard", "stats"],
     queryFn: async () => {
-      const res = await fetch("/api/users/stats");
+      const res = await fetch(API_ROUTES.USERS.STATS);
       await assertOk(res);
       const json = await res.json();
       return json.data;

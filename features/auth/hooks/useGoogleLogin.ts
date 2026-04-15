@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createClient } from "@/shared/lib/supabase/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { API_ROUTES } from "@/shared/constants/api-routes";
 
 /**
  * Hook that provides Google OAuth login and logout functionality.
@@ -20,7 +21,7 @@ export function useGoogleLogin() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/api/auth/callback`,
+          redirectTo: `${window.location.origin}${API_ROUTES.AUTH.CALLBACK}`,
           queryParams: {
             access_type: "offline",
             prompt: "consent",

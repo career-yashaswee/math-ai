@@ -5,6 +5,7 @@ import { Button as BaseButton, type ButtonProps as BaseButtonProps } from "@/com
 import { cn } from "@/lib/utils";
 import { usePlaySound } from "@/shared/hooks/usePlaySound";
 import { type AudioKey } from "@/shared/constants/audio";
+import { motion } from "framer-motion";
 
 export interface CoreButtonProps extends BaseButtonProps {
   /** Enables future micro-interactions and audio feedback */
@@ -18,10 +19,10 @@ export interface CoreButtonProps extends BaseButtonProps {
 
 /**
  * Design System Wrapper for Button.
- * Future extension point for:
- * - Motion animations (Framer Motion)
- * - Audio feedback (useSound hooks)
- * - Micro-interactions
+ * Features:
+ * - Subtle scale on hover/tap
+ * - Audio feedback (useSound)
+ * - Minimalist transition
  */
 export const Button = React.forwardRef<HTMLButtonElement, CoreButtonProps>(
   ({ className, interactive = true, sound = "CLICK", disableSound = false, onClick, ...props }, ref) => {
@@ -36,11 +37,22 @@ export const Button = React.forwardRef<HTMLButtonElement, CoreButtonProps>(
       }
     };
 
+    const motionProps = interactive
+      ? {
+          whileHover: { scale: 1.02 },
+          whileTap: { scale: 0.98 },
+          transition: { type: "spring", stiffness: 500, damping: 30 } as const,
+        }
+      : {};
+
+    const MotionBaseButton = motion.create(BaseButton);
+
     return (
-      <BaseButton
+      <MotionBaseButton
         ref={ref}
-        className={cn("transition-all duration-200", className)}
+        className={cn("transition-colors duration-200", className)}
         onClick={handleClick}
+        {...motionProps}
         {...props}
       />
     );

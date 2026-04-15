@@ -4,23 +4,40 @@ import * as React from "react";
 import * as BaseCard from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
+import { motion } from "framer-motion";
+
 export interface CoreCardProps extends React.ComponentPropsWithoutRef<typeof BaseCard.Card> {
   interactive?: boolean;
 }
 
 /**
  * Design System Wrapper for Card components.
+ * Features:
+ * - Subtle lift on hover (interactive mode)
+ * - Minimal scale up
+ * - Smooth transitions
  */
 export const Card = React.forwardRef<HTMLDivElement, CoreCardProps>(
   ({ className, interactive = true, ...props }, ref) => {
+    const motionProps = interactive
+      ? {
+          whileHover: { y: -4, scale: 1.01 },
+          whileTap: { scale: 0.98 },
+          transition: { type: "spring", stiffness: 400, damping: 25 } as const,
+        }
+      : {};
+
+    const MotionBaseCard = motion.create(BaseCard.Card);
+
     return (
-      <BaseCard.Card
+      <MotionBaseCard
         ref={ref}
         className={cn(
-          "transition-all duration-200",
-          interactive && "hover:border-primary/40",
+          "transition-colors duration-200",
+          interactive && "hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5",
           className
         )}
+        {...motionProps}
         {...props}
       />
     );
