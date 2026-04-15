@@ -79,13 +79,15 @@ export function QuestionCard({
         {/* Hint toggle */}
         {question.hint && (
           <div className="mt-3">
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={(e) => { e.stopPropagation(); setShowHint(!showHint); }}
-              className="flex items-center gap-1.5 text-xs text-yellow-500/80 hover:text-yellow-400 transition-colors"
+              className="h-auto p-0 flex items-center gap-1.5 text-xs text-yellow-500/80 hover:text-yellow-400 hover:bg-transparent transition-colors"
             >
               <Lightbulb className="w-3 h-3" />
               {showHint ? "Hide hint" : "Show hint"}
-            </button>
+            </Button>
             {showHint && (
               <p className="mt-2 text-xs text-yellow-400/70 bg-yellow-500/5 border border-yellow-500/10 rounded-lg p-2.5 leading-relaxed">
                 💡 {question.hint}

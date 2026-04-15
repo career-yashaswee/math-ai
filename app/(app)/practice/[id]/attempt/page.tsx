@@ -83,13 +83,15 @@ export default function AttemptPage() {
     <div className="max-w-4xl mx-auto px-4 py-8">
       {/* Top bar */}
       <div className="flex items-center justify-between mb-6">
-        <button
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={handleBack}
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors p-0 h-auto hover:bg-transparent"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Practice
-        </button>
+        </Button>
         <PracticeTimer startedAt={startedAt.current} />
       </div>
 

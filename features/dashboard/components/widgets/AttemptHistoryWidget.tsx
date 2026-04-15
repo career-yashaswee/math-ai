@@ -103,12 +103,14 @@ export function AttemptHistoryWidget() {
                 <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
                   <ScoreBadge score={item.final_score} />
                   {item.status === "analysed" && (
-                    <button
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       onClick={() => router.push(`/practice/${item.id}/analysis`)}
-                      className="text-xs text-primary/70 hover:text-primary flex items-center gap-1 transition-colors"
+                      className="h-auto p-0 text-xs text-primary/70 hover:text-primary hover:bg-transparent flex items-center gap-1 transition-colors"
                     >
                       View <ExternalLink className="w-3 h-3" />
-                    </button>
+                    </Button>
                   )}
                 </div>
               </div>

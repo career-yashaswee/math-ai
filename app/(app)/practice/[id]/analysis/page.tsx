@@ -245,10 +245,11 @@ export default function AnalysisPage() {
       {/* Correct Answer Reveal */}
       {analysis.correct_answer_hint && (
         <Card className="bg-card border-border mb-8">
-          <button
+          <Button
+            variant="ghost"
             id="toggle-correct-answer-btn"
             onClick={() => setShowCorrectAnswer(!showCorrectAnswer)}
-            className="w-full"
+            className="w-full h-auto p-0 hover:bg-transparent block text-left"
           >
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center justify-between text-base">
@@ -263,7 +264,7 @@ export default function AnalysisPage() {
                 )}
               </CardTitle>
             </CardHeader>
-          </button>
+          </Button>
           {showCorrectAnswer && (
             <CardContent>
               <div className="markdown-content prose prose-invert prose-sm max-w-none">
