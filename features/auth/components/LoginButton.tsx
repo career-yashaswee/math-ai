@@ -1,7 +1,7 @@
 "use client";
 
 import { useGoogleLogin } from "@/features/auth/hooks/useGoogleLogin";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/core/Button";
 import { Loader2 } from "lucide-react";
 
 interface LoginButtonProps {

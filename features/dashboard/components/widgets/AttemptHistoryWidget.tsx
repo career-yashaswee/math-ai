@@ -1,10 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Badge,
+  Button,
+  Skeleton,
+} from "@/components/core";
 import { History, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { useAttemptHistory } from "@/features/practice/hooks/useAttempt";
 import { friendlyDate, formatDuration } from "@/shared/utils/date";

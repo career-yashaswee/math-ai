@@ -6,18 +6,18 @@ import { useQuestion } from "@/features/practice/hooks/useQuestions";
 import { useSubmitAttempt } from "@/features/practice/hooks/useAttempt";
 import { MarkdownAnswerEditor } from "@/features/practice/components/MarkdownAnswerEditor";
 import { PracticeTimer, getElapsedSeconds } from "@/features/practice/components/PracticeTimer";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Separator } from "@/components/ui/separator";
 import {
+  Button,
+  Badge,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+  Skeleton,
+  Separator,
+} from "@/components/core";
 import { ArrowLeft, Send, AlertTriangle, BookOpen } from "lucide-react";
 import { DIFFICULTY_LABELS, DIFFICULTY_COLORS } from "@/shared/types/domain.types";
 import ReactMarkdown from "react-markdown";

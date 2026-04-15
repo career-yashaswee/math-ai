@@ -1,8 +1,8 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/core/Badge";
+import { Button } from "@/components/core/Button";
+import { Card, CardContent, CardFooter } from "@/components/core/Card";
 import { Lightbulb, BookOpen, ChevronRight, Clock } from "lucide-react";
 import { useState } from "react";
 import { DIFFICULTY_LABELS, DIFFICULTY_COLORS, type QuestionSafe } from "@/shared/types/domain.types";

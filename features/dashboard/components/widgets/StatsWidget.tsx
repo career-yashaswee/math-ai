@@ -1,7 +1,6 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Card, CardContent, Skeleton } from "@/components/core";
 import { Flame, Coins, Zap, Target, TrendingUp, Star } from "lucide-react";
 import { useDashboardStats } from "@/features/dashboard/hooks/useDashboardStats";
 import { cn } from "@/lib/utils";
